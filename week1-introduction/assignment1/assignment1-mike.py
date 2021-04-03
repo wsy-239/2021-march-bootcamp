@@ -14,6 +14,7 @@ def factorial(x: int) -> int:
 
 assert factorial(0) == 1
 assert factorial(1) == 1
+assert factorial(4) == 24
 assert factorial(9) == 362880
 
 
@@ -44,6 +45,8 @@ assert not is_leap_year(2001)
 # Q4. Write a program to convert a list of lowercase words to uppercase words.
 
 def to_upper_case(words: [str]) -> [str]:
+    print(3)
+
     return []
 
 

@@ -42,7 +42,7 @@ assert print_sum(5) == "15"
 # Q3. Write a program to check is a year is leap year (x is always > 0)
 
 def is_leap_year(year: int) -> bool:
-    return year % 400 == 0 or year % 4 == 0 and year % 100 != 0
+    return year % 400 == 0 or (year % 4 == 0 and year % 100 != 0)
 
 
 assert is_leap_year(2000)

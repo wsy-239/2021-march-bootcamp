@@ -4,11 +4,21 @@ Implement cross product function for two python list.
 Reference https://numpy.org/doc/stable/reference/generated/numpy.cross.html
 Only take care of 1-d list use case.
 """
-import numpy as np
 
-a = [1, 2, 3]
-b = [4, 5, 6]
-print(np.cross(a, b))
+
+def cross_product(n: [int], m: [int]) -> [int]:
+    if len(n) == 2:
+        n.append(0)
+    if len(m) == 2:
+        m.append(0)
+    r0 = n[1] * m[2] - m[1] * n[2]
+    r1 = n[2] * m[0] - n[0] * m[2]
+    r2 = n[0] * m[1] - n[1] * m[0]
+    return [r0, r1, r2]
+
+
+assert cross_product([1, 2, 3], [4, 5, 6]) == [-3, 6, -3]
+assert cross_product([1, 2], [3, 4]) == [0, 0, -2]
 # Q2.
 """
 交易传输指令经常需要验证完整性，比如以下的例子

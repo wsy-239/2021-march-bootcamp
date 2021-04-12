@@ -1,8 +1,13 @@
 # Q1.
 """
-Implement cross product function for two python list.
-Reference https://numpy.org/doc/stable/reference/generated/numpy.cross.html
-Only take care of 1-d list use case.
+请实现 2个python list 的 ‘cross product’ function.
+要求按照Numpy 中cross product的效果: https://numpy.org/doc/stable/reference/generated/numpy.cross.html
+只实现 1-d list 的情况即可.
+
+x = [1, 2, 0]
+y = [4, 5, 6]
+cross(x, y)
+> [12, -6, -3]
 """
 
 # Q2.
@@ -63,4 +68,15 @@ slowest([[0, 2], [1, 5], [2, 7], [0, 16], [3, 19], [4, 25], [2, 35]]) return 2
 
 def judgeRobotMove(moves: str) -> bool:
 
+"""
+
+# Q5
+"""
+写一个验证email格式的程序， 对于给定的string监查是不是一个email地址:
+1. 必须只包含小写字母，"-", "/" , "." , "_" 和数字
+2. 有且仅有一个"@"
+3. @之前之后不能为空
+4. 以 ".edu" 或 ".com" 结尾
+
+可以使用regex或者python标准包的方法。
 """

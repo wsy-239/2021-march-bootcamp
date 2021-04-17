@@ -61,11 +61,9 @@ def checkOrders(orders: [str]) -> [bool]:
             return True
         else:
             return False
+    return [check_single(i) for i in orders]
 
-    s = []
-    for i in orders:
-        s.append(check_single(i))
-    return s
+
 
 
 b = ["()", "(", "{}[]", "[][][]", "[{]{]"]

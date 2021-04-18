@@ -1,3 +1,9 @@
+#!/usr/bin/env python
+# coding: utf-8
+
+# In[1]:
+
+
 # Assignment 1
 # This assignment is for exercising Python fundamental I and getting familiar with Python syntax.
 
@@ -10,13 +16,13 @@
 
 def factorial(x: int) -> int:
     if x < 1:
-        raise Exception("input can not be < 1")
-
-    res = 1
-    for i in range(1, x + 1):
-        res *= i
-    return res
-
+        return -1
+    else:
+        for i in range(1,x + 1):
+            result *= i
+    return result
+        
+    
 assert factorial(0) == 1
 assert factorial(1) == 1
 assert factorial(9) == 362880
@@ -26,7 +32,12 @@ assert factorial(9) == 362880
 # [1 + 2 + ... + x] and x is always >= 1.
 
 def print_sum(x: int) -> str:
-    return str(sum(range(x + 1)))
+    return str(_sum(x))
+
+def _sum(x):
+    if x == 1:
+        return 1
+    return x + _sum(x - 1)
 
 
 assert print_sum(1) == "1"
@@ -37,8 +48,7 @@ assert print_sum(5) == "15"
 # Q3. Write a program to check is a year is leap year (x is always > 0)
 
 def is_leap_year(year: int) -> bool:
-    return year % 400 == 0 or (year % 4 == 0 and year % 100 != 0)
-
+    return year % 400 == 0 or (year % 4 == 0 and year % 100 != 0):
 
 
 assert is_leap_year(2000)
@@ -50,8 +60,8 @@ assert not is_leap_year(2001)
 # Q4. Write a program to convert a list of lowercase words to uppercase words.
 
 def to_upper_case(words: [str]) -> [str]:
-    return [w.upper() for w in words]
-
+    w = list(map(str.upper,words))
+    return w
 
 
 assert to_upper_case(["abc", "de"]) == ["ABC", "DE"]
@@ -63,7 +73,6 @@ assert to_upper_case(["Amazon", "Apple"]) == ["AMAZON", "APPLE"]
 
 def xor(a: bool, b: bool) -> bool:
     return a != b
-
 
 
 assert not xor(True, True)

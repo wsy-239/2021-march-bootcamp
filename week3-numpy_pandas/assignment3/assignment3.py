@@ -1,3 +1,7 @@
+# 注意 - Copy this file and rename as assignment3_{first_name}.py then complete code with a PR.
+# 注意 - Copy this file and rename as assignment3_{first_name}.py then complete code with a PR.
+# 注意 - Copy this file and rename as assignment3_{first_name}.py then complete code with a PR.
+
 # Q1.
 """
 请实现 2个python list 的 ‘cross product’ function.

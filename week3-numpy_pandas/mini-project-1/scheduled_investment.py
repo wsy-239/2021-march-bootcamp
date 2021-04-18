@@ -1,3 +1,7 @@
+# 注意 - Copy this file and rename as scheduled_investment_{first_name}.py then complete code with a PR.
+# 注意 - Copy this file and rename as scheduled_investment_{first_name}.py then complete code with a PR.
+# 注意 - Copy this file and rename as scheduled_investment_{first_name}.py then complete code with a PR.
+
 """ DO NOT EDIT (BEGIN) """
 import pandas as pd
 import datetime as dt

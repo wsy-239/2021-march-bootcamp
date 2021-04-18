@@ -10,8 +10,8 @@ def read_data() -> pd.DataFrame:
     return pd.read_csv(RAW_DATA_NAME)
 
 
-def write_data(data: pd.DataFrame) -> None:
-    return data.to_csv(ANALYSIS_RESULT_DATA_NAME, index=False)
+def write_data(data: pd.DataFrame, file_name: str = ANALYSIS_RESULT_DATA_NAME) -> None:
+    return data.to_csv(file_name, index=False)
 
 
 def is_monday(day: str) -> bool:
@@ -53,7 +53,7 @@ def calculate_scheduled_investment(data: pd.DataFrame) -> ():
 
 # -- TODO: Part 2 (START)
 def export_result() -> float:
-    # 生成 QQQ-result.csv, 目标是跟QQQ-result-expected.csv 一致
+    # 生成 {first_name}_QQQ-result.csv, 目标是跟QQQ-result-expected.csv 一致
     # 在这里调用 calculate_scheduled_investment, 并且赋值
     # 到asset 和cost.
     # 最后返回十年的年化率

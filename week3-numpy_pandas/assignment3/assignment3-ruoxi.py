@@ -1,17 +1,18 @@
-# 注意 - Copy this file and rename as assignment3_{first_name}.py then complete code with a PR.
-# 注意 - Copy this file and rename as assignment3_{first_name}.py then complete code with a PR.
-# 注意 - Copy this file and rename as assignment3_{first_name}.py then complete code with a PR.
-
 # Q1.
 """
 请实现 2个python list 的 ‘cross product’ function.
 要求按照Numpy 中cross product的效果: https://numpy.org/doc/stable/reference/generated/numpy.cross.html
 只实现 1-d list 的情况即可.
-
 x = [1, 2, 0]
 y = [4, 5, 6]
 cross(x, y)
 > [12, -6, -3]
+
+
+def crossProduct(x: [int], y: [int]) -> [int]:
+    return [x[1] * y[2] - x[2] * y[1], x[2] * y[0] - x[0] * y[2], x[0] * y[1] - x[1] * y[0]]
+
+assert crossProduct([1, 2, 0], [4, 5, 6]) == [12, -6, -3]
 """
 
 # Q2.
@@ -30,9 +31,27 @@ cross(x, y)
 可以通过很多种方式验证完整性，假设我们通过判断整个文本中的括号 比如 '{}', '[]', '()' 来判断下单是否为有效的。
 比如 {{[],[]}}是有效的，然而 []{[}](是无效的。 
 写一个python 程序来进行验证。
- def checkOrders(orders: [str]) -> [bool]:
- return a list of True or False.
-checkOrders(["()", "(", "{}[]", "[][][]", "[{]{]"] return [True, False, True, True, False]
+
+
+d = {'}': '{', ']': '[', ')': '(', '>': '<'}
+l,r = d.values(), d.keys()
+def checkOrders(orders: str) -> bool:
+    arr = []
+    for c in orders:
+        if c in l:
+            arr.append(c)
+        elif c in r:
+            if arr and arr[-1] == d[c]:
+                arr.pop()
+    return arr == []
+
+def checkList(list:[str]) -> [bool]:
+    n = []
+    for i in list:
+        n.append(checkOrders(i))
+    return n
+
+assert checkList(["()", "(", "{}[]", "[][][]", "[{]{]"]) == [True, False, True, True, False]
 """
 
 # Q3
@@ -51,27 +70,41 @@ Broker 4 使用了25-19=6s
 Broker 2 使用了35-25=10s
 综合表现，是broker2出现了最慢的交易表现。
 
-Def slowest(orders: [[int]]) -> int:
 
-slowest([[0, 2], [1, 5], [2, 7], [0, 16], [3, 19], [4, 25], [2, 35]]) return 2
+def slowest(orders: [[int]]) -> int:
+    d = {}
+    for i in range(len(orders)):
+        if i == 0:
+            d[orders[i][0]] = orders[i][1] 
+    else:
+        d[orders[i][0]] = orders[i][1] - orders[i - 1][1]
+    for i,j in d.items():
+        if j == max(d.values()):
+            return i 
+
+assert slowest([[0, 2], [1, 5], [2, 7], [0, 16], [3, 19], [4, 25], [2, 35]]) == 2
 """
 
 
 # Q4
 """
 判断机器人是否能返回原点
-
 一个机器人从平面(0,0)的位置出发，他可以U(向上), L(向左), R(向右), 或者D(向下)移动一个格子。
 给定一个行走顺序，问是否可以回到原点。
-
 例子
 1. moves = "UD", return True.
 2. moves = "LL", return False.
 3. moves = "RRDD", return False.
 4. moves = "LDRRLRUULR", return False.
 
-def judgeRobotMove(moves: str) -> bool:
 
+def judgeRobotMove(moves: str) -> bool:
+    return moves.count("U") == moves.count("D") and moves.count("L") == moves.count("R")
+
+assert judgeRobotMove("UD")
+assert not judgeRobotMove("LL")
+assert not judgeRobotMove("RRDD")
+assert not judgeRobotMove("LDRRLRUULR")
 """
 
 # Q5
@@ -81,6 +114,8 @@ def judgeRobotMove(moves: str) -> bool:
 2. 有且仅有一个"@"
 3. @之前之后不能为空
 4. 以 ".edu" 或 ".com" 结尾
-
 可以使用regex或者python标准包的方法。
+
+
+
 """

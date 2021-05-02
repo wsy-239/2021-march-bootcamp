@@ -70,7 +70,7 @@ def upsert_client_rate():
     print(request)
 
     # After getting post request - how to update json file?
-    a = request.get_json()
+    a = request.json
 
     return update_client_rates(list(a.keys())[0], a[list(a.keys())[0]]["rate"])
 

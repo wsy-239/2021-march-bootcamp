@@ -35,7 +35,7 @@ def execute_read_query(connection, query):
         print(f"The error '{e}' occurred")
 
 
-conn = create_connection("test02.db")
+conn = create_connection("../test02.db")
 create_users_table = """
 CREATE TABLE IF NOT EXISTS users (
   id INTEGER PRIMARY KEY AUTOINCREMENT,

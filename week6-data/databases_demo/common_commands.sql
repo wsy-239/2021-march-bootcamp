@@ -3,6 +3,17 @@
 $sqlite3 testDB.db .dump > testDB.sql
 $sqlite3 testDB.db < testDB.sql
 
+sqlite> .read db.sql
+.mode csv
+-- use '.separator SOME_STRING' for something other than a comma.
+.headers on
+.out file.csv
+
+.mode insert <target_table_name>
+.out file.sql
+
+PRAGMA foreign_keys = ON;
+
 -- Data Type -- https://www.tutorialspoint.com/sqlite/sqlite_data_types.htm
 
 CREATE TABLE exchange (

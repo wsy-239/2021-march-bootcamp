@@ -30,6 +30,8 @@ def get_client_rates():
     import pandas as pd
     df = pd.read_json("client_rate.json")
     return df.to_dict()
+
+
 # -- DO NOT EDIT END
 
 
@@ -44,8 +46,12 @@ def get_client_rate(client_id):
     :return: http response
     """
     # How to get the actual rate from client_id?
-    di=get_client_rates()
-    return str(di[client_id]['rate'])
+    di = get_client_rates()
+    if client_id in di.keys():
+        return str(di[client_id]['rate'])
+    else:
+        return "This client doesn't exist!"
+
 
 # -- TODO END: Part 1
 
@@ -64,11 +70,9 @@ def upsert_client_rate():
     print(request)
 
     # After getting post request - how to update json file?
-    #return request.get_json()
-    a=request.data
-    a1=str(a,"utf-8")
-    a2=json.loads(a1)
-    return update_client_rates(list(a2.keys())[0],a2[list(a2.keys())[0]]["rate"])
+    a = request.get_json()
+
+    return update_client_rates(list(a.keys())[0], a[list(a.keys())[0]]["rate"])
 
 
 def update_client_rates(client_id, rate):
@@ -82,21 +86,21 @@ def update_client_rates(client_id, rate):
     # check if exist
     # replace or add client rate
     # re-write the file
-    import json
-    import os
-    di=get_client_rates()
+
+    import pandas as pd
+    di = get_client_rates()
     if client_id in di.keys():
         print("This client has existed.")
-        di[client_id]["rate"]=round(rate,2)
+        di[client_id]["rate"] = round(rate, 2)
     else:
         print("This client doesn't exist.")
-        di[client_id]={}
-        di[client_id]["rate"]=round(rate,2)
-    #di.to_json("client_rate.json")
-    with open("client_rate.json", 'w') as r:
-        json.dump(di,r,indent=4)
-        r.close()
+        di[client_id] = {}
+        di[client_id]["rate"] = round(rate, 2)
+    df = pd.DataFrame(di)
+    df.to_json("client_rate.json")
+
     return "User updated!"
+
 
 # -- TODO END: Part 4
 

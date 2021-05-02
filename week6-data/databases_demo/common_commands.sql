@@ -17,35 +17,35 @@ PRAGMA foreign_keys = ON;
 -- Data Type -- https://www.tutorialspoint.com/sqlite/sqlite_data_types.htm
 
 CREATE TABLE exchange (
-id INTEGER PRIMARY KEY,
-name TEXT NOT NULL,
-symbol TEXT NOT NULL,
-create_at INTEGER NOT NULL,
-status TEXT NOT NULL
--- address VARCHAR(255) --
+    id INTEGER PRIMARY KEY NOT NULL,
+    name TEXT NOT NULL,
+    symbol TEXT NOT NULL,
+    create_at INTEGER NOT NULL,
+    status TEXT NOT NULL
+    -- address VARCHAR(255) --
 );
 
 
 CREATE TABLE stock (
-id INTEGER NOT NULL,
-symbol TEXT PRIMARY KEY,
-status TEXT NOT NULL,
-e_id INTEGER NOT NULL, -- which exchange --
-ipo_at INTEGER NOT NULL,
-FOREIGN KEY (e_id) REFERENCES exchange (id)
+    id INTEGER NOT NULL,
+    symbol TEXT PRIMARY KEY,
+    status TEXT NOT NULL,
+    e_id INTEGER NOT NULL, -- which exchange --
+    ipo_at INTEGER NOT NULL,
+    FOREIGN KEY (e_id) REFERENCES exchange (id)
 );
 
 
 CREATE TABLE price (
-id INTEGER PRIMARY KEY,
-symbol TEXT NOT NULL,
-trade_time INTEGER NOT NULL,
-open REAL NOT NULL,
-high REAL NOT NULL,
-low REAL NOT NULL,
-close REAL NOT NULL,
-volume INTEGER NOT NULL,
-FOREIGN KEY (symbol) REFERENCES stock (symbol)
+    id INTEGER PRIMARY KEY NOT NULL,
+    symbol TEXT NOT NULL,
+    trade_time INTEGER NOT NULL,
+    open REAL NOT NULL,
+    high REAL NOT NULL,
+    low REAL NOT NULL,
+    close REAL NOT NULL,
+    volume INTEGER NOT NULL,
+    FOREIGN KEY (symbol) REFERENCES stock (symbol)
 );
 
 INSERT INTO exchange (id, name, symbol, create_at, status)
@@ -53,6 +53,9 @@ VALUES (1, 'New York', 'NYSE', -4800764658, 'ACTIVE');
 
 INSERT INTO exchange (id, name, symbol, create_at, status)
 VALUES (2, 'Chicago', 'CME', 1184198400, 'ACTIVE');
+
+INSERT INTO exchange (id, name, symbol, create_at, status)
+VALUES (NULL, 'Test', 'TEST', 1184198400, 'INACTIVE');
 
 sqlite>.header on
 sqlite>.mode column
@@ -75,19 +78,16 @@ VALUES (3, 'GOOG', 1002, 100.0, 101.0, 95.0, 100.5, 2000);
 
 INSERT INTO price (id, symbol, trade_time, open, high, low, close, volume)
 VALUES (4, 'APPL', 1005, 1200.0, 1101.0, 1295.0, 1100.5, 3000);
--- DROP DELETE
-
-
-
+-- DROP / DELETE
 -- UPDATE
-
+-- search tutorial --
 
 
 -- SEARCH - WHERE / LIKE
 SELECT * FROM price WHERE open > 500;
 
 -- JOIN
--- 找到在price里面Exchange的list
+-- 找到在price里面Exchange symbol的list
 -- GOOG ->
 -- NYSE
 

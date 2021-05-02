@@ -89,10 +89,6 @@ def get_client_rate(client_id):
     # if client_id in all_clients:
     #     return str(all_clients[client_id]['rate'])
     # -- TODO: Part 1, Replace to lookup from database
-    conn = create_connection("test.db")
-    res = execute_read_query(conn,
-                             "SELECT rate FROM client_rates WHERE client_id = {};".format(client_id))
-    return str(res[0][0])
     # -- TODO END: Part 1
     return "NOT_FOUND"
 
@@ -136,5 +132,6 @@ def update_client_rates(client_id, rate):
 
 
 if __name__ == "__main__":
+    # -- TODO: use 'test_first_name.db' as db file.
     load_data("test.db")
     app.run()

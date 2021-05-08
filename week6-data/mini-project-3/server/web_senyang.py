@@ -125,7 +125,7 @@ def update_client_rates(client_id, rate):
 
     # -- TODO: Part 2, Replace to write to database
     con = create_connection("test_senyang.db")
-    execute_write_query(con, "INSERT INTO client_rates VALUES ({},'{}',{});".format(client_id[-1], client_id, rate))
+    execute_write_query(con, "INSERT INTO client_rates VALUES ({},'{}',{});".format(client_id[6:len(client_id)-1], client_id, rate))
     # -- TODO END: Part 2
 
 

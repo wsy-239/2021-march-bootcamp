@@ -88,8 +88,12 @@ def get_client_rate(client_id):
 
     # -- TODO: Part 1, Replace to lookup from database
     con = create_connection("test_senyang.db")
-    res = execute_read_query(con, "SELECT rate FROM client_rates WHERE client_id='{}';".format(client_id))
-    return str(res[0][0])
+    client_ids=execute_read_query(con, "SELECT client_id FROM client_rates WHERE client_id='{}';".format(client_id))
+    if client_id == client_ids[0][0]:
+        res = execute_read_query(con, "SELECT rate FROM client_rates WHERE client_id='{}';".format(client_id))
+        return str(res[0][0])
+    else:
+        return "This client doesn't exist."
     # -- TODO END: Part 1
 
 

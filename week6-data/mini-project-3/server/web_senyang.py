@@ -88,12 +88,12 @@ def get_client_rate(client_id):
 
     # -- TODO: Part 1, Replace to lookup from database
     con = create_connection("test_senyang.db")
-    client_ids=execute_read_query(con, "SELECT client_id FROM client_rates WHERE client_id='{}';".format(client_id))
+    client_ids = execute_read_query(con, "SELECT client_id FROM client_rates WHERE client_id='{}';".format(client_id))
     if client_id == client_ids[0][0]:
         res = execute_read_query(con, "SELECT rate FROM client_rates WHERE client_id='{}';".format(client_id))
         return str(res[0][0])
     else:
-        return "This client doesn't exist."
+        return "0"
     # -- TODO END: Part 1
 
 
@@ -107,7 +107,9 @@ def upsert_client_rate():
     # We want to update if the client exist in the client_rate.json data
     # Or insert a new client-rate pair into client_rate.json data
     data = request.get_json()
-    update_client_rates(list(data.keys())[0], data[list(data.keys())[0]]["rate"])
+    client_id = list(data.keys())[0]
+    rate = data[client_id]["rate"]
+    update_client_rates(client_id, rate)
     # new def update_client_rates_db()
     # 1. if exist - update
     # 2. not exist - insert - query max - then + 1
@@ -125,7 +127,8 @@ def update_client_rates(client_id, rate):
 
     # -- TODO: Part 2, Replace to write to database
     con = create_connection("test_senyang.db")
-    execute_write_query(con, "INSERT INTO client_rates VALUES ({},'{}',{});".format(client_id[6:len(client_id)-1], client_id, rate))
+    execute_write_query(con, "INSERT INTO client_rates VALUES ({},'{}',{});".format(client_id[6:len(client_id) - 1],
+                                                                                    client_id, rate))
     # -- TODO END: Part 2
 
 

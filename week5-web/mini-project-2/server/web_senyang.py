@@ -47,10 +47,10 @@ def get_client_rate(client_id):
     """
     # How to get the actual rate from client_id?
     di = get_client_rates()
-    if client_id in di.keys():
+    if client_id in di:
         return str(di[client_id]['rate'])
     else:
-        return "This client doesn't exist!"
+        return "0"
 
 
 # -- TODO END: Part 1
@@ -70,9 +70,10 @@ def upsert_client_rate():
     print(request)
 
     # After getting post request - how to update json file?
-    a = request.json
-
-    return update_client_rates(list(a.keys())[0], a[list(a.keys())[0]]["rate"])
+    data = request.json
+    client_id = list(data.keys())[0]
+    rate = data[client_id]["rate"]
+    return update_client_rates(client_id, rate)
 
 
 def update_client_rates(client_id, rate):
@@ -89,13 +90,10 @@ def update_client_rates(client_id, rate):
 
     import pandas as pd
     di = get_client_rates()
-    if client_id in di.keys():
-        print("This client has existed.")
-        di[client_id]["rate"] = round(rate, 2)
-    else:
-        print("This client doesn't exist.")
+    if client_id not in di:
         di[client_id] = {}
-        di[client_id]["rate"] = round(rate, 2)
+    di[client_id]["rate"] = round(rate, 4)
+
     df = pd.DataFrame(di)
     df.to_json("client_rate.json")
 

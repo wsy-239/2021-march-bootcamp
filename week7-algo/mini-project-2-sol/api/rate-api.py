@@ -9,12 +9,12 @@ def upsert_client_rate(client_id: str, rate: float) -> None:
     requests.post("http://127.0.0.1:5000/rate", json={"client_id": client_id, "rate": rate})
 
 
-def test_get_rate():
+def test_get_rate() -> None:
     assert get_rate('client1') == 0.2
     assert get_rate('client-1') == 0.0
 
 
-def test_upsert_rate():
+def test_upsert_rate() -> None:
     print(get_rate('client2'))
     upsert_client_rate("client2", 0.5)
     assert get_rate('client2') == 0.5
